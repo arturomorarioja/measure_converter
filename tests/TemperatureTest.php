@@ -4,7 +4,7 @@
 
     use PHPUnit\Framework\TestCase;
 
-    class testTemperature extends TestCase {
+    class TemperatureTest extends TestCase {
 
         /**
          * @dataProvider ConvertCelsiusToFahrenheitPasses

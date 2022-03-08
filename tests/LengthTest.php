@@ -4,7 +4,7 @@
 
     use PHPUnit\Framework\TestCase;
 
-    class testLength extends TestCase {
+    class LengthTest extends TestCase {
 
         /**
          * @dataProvider ConvertPasses

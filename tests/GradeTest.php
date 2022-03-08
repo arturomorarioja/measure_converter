@@ -13,7 +13,7 @@
 
     use PHPUnit\Framework\TestCase;
 
-    class testGrade extends TestCase {
+    class GradeTest extends TestCase {
 
         public function testConvert12Passes(): void {
             $grade = new Grade();
