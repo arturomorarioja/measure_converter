@@ -1,0 +1,13 @@
+{
+    "name": "arturo-mora-rioja/php_mysql_measure_converter",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Arturo Mora-Rioja",
+            "email": "amri@kea.dk"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
