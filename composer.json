@@ -3,7 +3,7 @@
     "description": "Measure Converter - Sample application for assessing the use of unit tests and integration tests",
     "version": "1.0",
     "type": "library",
-    "license": "GPL",
+    "license": "CC-BY-NC-4.0",
     "authors": [
         {
             "name": "Arturo Mora-Rioja",
