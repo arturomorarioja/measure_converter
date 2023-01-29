@@ -1,4 +1,8 @@
+/* eslint-disable no-undef */
+'use strict';
 $(function() {
+
+    const API_URL = 'api/index.php';
 
     //  Navigation menu
 
@@ -22,7 +26,7 @@ $(function() {
         const system = $('[name="radLengthSystem"]:checked').val();
         
         $.ajax({
-            url: 'api/index.php',
+            url: API_URL,
             method: 'POST',
             data: {
                 'conversion': 'length',
@@ -41,11 +45,11 @@ $(function() {
     $('#sectionTemperature > form').on('submit', function(e) {
         e.preventDefault();
         const measure = $('#txtTemperature').val();
-        const from = $('#lstFrom').val()
-        const to = $('#lstTo').val()
+        const from = $('#lstFrom').val();
+        const to = $('#lstTo').val();
 
         $.ajax({
-            url: 'api/index.php',
+            url: API_URL,
             method: 'POST',
             data: {
                 'conversion': 'temperature',
@@ -54,7 +58,6 @@ $(function() {
                 'destinationScale': to
             }
         }).done(function(result) {
-            // const text = measure + ' &deg;' + from + ' is ' + result + ' &deg;' + to;
             const text = `${measure} &deg;${from} is ${result} &deg;${to}`;
 
             $('#sectionTemperature > div').html(text);
@@ -63,6 +66,25 @@ $(function() {
 
     //  Currency
 
+    $.ajax({
+        url: API_URL,
+        method: 'POST',
+        data: {
+            'conversion': 'currency',
+            'action': 'getCurrencyList'
+        }
+    }).done(function(result) {
+        result = JSON.parse(result);
+        // eslint-disable-next-line no-unused-vars
+        for (const [key, value] of Object.entries(result)) {
+            $('#cmbFrom').append($('<option>').val(value[0]).text(value[0] + ' - ' + value[1]));
+            $('#cmbTo').append($('<option>').val(value[0]).text(value[0] + ' - ' + value[1]));
+        }
+        // Default values
+        $('#cmbFrom > option[value="DKK"]').attr('selected', true);
+        $('#cmbTo > option[value="EUR"]').attr('selected', true);
+    });
+
     $('#sectionCurrency > form').on('submit', function(e) {
         e.preventDefault();
         const measure = $('#txtCurrency').val();
@@ -70,10 +92,11 @@ $(function() {
         const to = $('#cmbTo').val();
 
         $.ajax({
-            url: 'api/index.php',
+            url: API_URL,
             method: 'POST',
             data: {
                 'conversion': 'currency',
+                'action': 'convert',
                 'measure': measure,
                 'baseCurrency': from,
                 'destinationCurrency': to
@@ -118,7 +141,7 @@ $(function() {
         const country = $('[name="radGradingSystem"]:checked').val();
 
         $.ajax({
-            url: 'api/index.php',
+            url: API_URL,
             method: 'POST',
             data: {
                 'conversion': 'grading',
@@ -126,7 +149,6 @@ $(function() {
                 'country': country
             }
         }).done(function(result) {
-console.log(result)            ;
             let text = `${measure} in ${country} is ${result} in `;
             text += (country === 'Denmark' ? 'USA' : 'Denmark');
 

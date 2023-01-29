@@ -3,22 +3,22 @@
  * Currency class
  * 
  * @author  Arturo Mora-Rioja
- * @version 1.0, March 2022
+ * @version 1.0.0 March 2022
+ *          1.0.1 August 2022  Adaptation to changes in the external API
+ *                             New feature: instead of hardcoding currencies, the full list is now offered
+ *                             Refactoring: the cURL API call is now a private method
+ *          1.0.2 January 2023 Currency API key hidden
+ *                             Readme added  
  */
 
+    require_once '../info/info.php';
+
     class Currency {
-        const apiKey = 'ef739da0-994b-11ec-8e3c-ad75723fab21';
+        
+        const BASE_URL = 'https://api.currencyapi.com/v3/';
+        const API_KEY = apiKey::CURRENCY_API_KEY;
 
-        private string $baseCurrency;
-        private float $amount;
-
-        function __construct(string $baseCurrency = 'DKK') {
-            $this->baseCurrency = $baseCurrency;
-        }
-
-        function convert(float $amount, string $destinationCurrency = 'EUR') {
-            $url = 'https://freecurrencyapi.net/api/v2/latest?apikey=' . Currency::apiKey . '&base_currency=' . $this->baseCurrency;
-
+        private function apiCall(string $url) {
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -29,7 +29,34 @@
             $response = json_decode(curl_exec($ch), true);
             curl_close($ch);
 
-            return round($amount * $response['data'][$destinationCurrency], 2);
+            return $response;
+        }
+
+        private function extractCurrency($currency) {
+            return [$currency['code'], $currency['name']];
+        }
+
+        public function getCurrencies() {
+            $url = self::BASE_URL . 'currencies?apikey=' . self::API_KEY;
+
+            $response = $this->apiCall($url);
+
+            // array_values turns the associative array into a normal array, so that it can be processed by array_map.
+            // array_filter eliminates null values.
+            $currencies = array_filter(array_values($response['data']));
+            return array_map(array($this, 'extractCurrency'), $currencies);
+        }
+
+        public function convert(float $amount, string $baseCurrency = 'DKK', string $destinationCurrency = 'EUR') {
+            $url = self::BASE_URL . 'latest?apikey=' . self::API_KEY . '&base_currency=' . $baseCurrency;
+
+            $response = $this->apiCall($url);
+
+            if (isset($response['errors'])) {
+                return $response['message'];
+            } else {
+                return round($amount * $response['data'][$destinationCurrency]['value'], 2);
+            }
         }
     }
 ?>

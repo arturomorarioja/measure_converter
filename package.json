@@ -1,0 +1,31 @@
+{
+  "name": "php_mysql_measure_converter",
+  "version": "1.0.0",
+  "description": "Sample application to demonstrate basic concepts of object-oriented programming, unit testing, and integration testing.",
+  "main": "index.html",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arturomorarioja/measure_converter.git"
+  },
+  "keywords": [
+    "converter",
+    "php",
+    "jquery",
+    "phpunit"
+  ],
+  "author": "Arturo Mora-Rioja",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/arturomorarioja/measure_converter/issues"
+  },
+  "homepage": "https://github.com/arturomorarioja/measure_converter#readme",
+  "devDependencies": {
+    "eslint": "^8.33.0"
+  }
+}
