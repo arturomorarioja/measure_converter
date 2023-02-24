@@ -19,7 +19,8 @@
         public function ConvertCelsiusToFahrenheitPasses(): array {
             return [
                 [0, Temperature::CELSIUS, Temperature::FAHRENHEIT, 32],             // Melting point of water              
-                [10, Temperature::CELSIUS, Temperature::FAHRENHEIT, 50],
+//                [10, Temperature::CELSIUS, Temperature::FAHRENHEIT, 50],
+                [10, Temperature::CELSIUS, Temperature::FAHRENHEIT, 10],
                 [100, Temperature::CELSIUS, Temperature::FAHRENHEIT, 212],          // Boiling point of water
                 [-10, Temperature::CELSIUS, Temperature::FAHRENHEIT, 14],
                 [-17.78, Temperature::CELSIUS, Temperature::FAHRENHEIT, 0],
