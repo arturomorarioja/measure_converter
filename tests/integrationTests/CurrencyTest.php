@@ -6,11 +6,21 @@
 
     class CurrencyTest extends TestCase
     {
+        private Currency $currency;
+
+        protected function setUp(): void
+        {
+            $this->currency = new Currency;
+        }
+
+        protected function tearDown(): void
+        {
+            unset($this->currency);
+        }
+
         public function testGetCurrencies(): void 
         {
-            $currency = new Currency;
-
-            $result = $currency->getCurrencies();
+            $result = $this->currency->getCurrencies();
 
             $this->assertIsArray($result);
         }
@@ -20,9 +30,7 @@
          */
         public function testConvertNoCurrencies($amount) 
         {
-            $currency = new Currency;
-
-            $result = $currency->convert($amount);
+            $result = $this->currency->convert($amount);
 
             $this->assertIsNumeric($result);
         }
@@ -41,9 +49,7 @@
          */
         public function testConvertFromCurrency($amount, $from) 
         {
-            $currency = new Currency;
-
-            $result = $currency->convert($amount, $from);
+            $result = $this->currency->convert($amount, $from);
 
             $this->assertIsNumeric($result);
         }
@@ -62,9 +68,7 @@
          */
         public function testConvert($amount, $from, $to) 
         {
-            $currency = new Currency;
-
-            $result = $currency->convert($amount, $from, $to);
+            $result = $this->currency->convert($amount, $from, $to);
 
             $this->assertIsNumeric($result);
         }
@@ -80,25 +84,23 @@
 
         public function testNonExistingFromCurrency()
         {
-            $currency = new Currency;
             $amount = 1000;
             $from = 'XXX';
             $to = 'USD';
             $expected = 'Validation error';
 
-            $result = $currency->convert($amount, $from, $to);
+            $result = $this->currency->convert($amount, $from, $to);
 
             $this->assertEquals($expected, $result);
         }
         public function testNonExistingToCurrency()
         {
-            $currency = new Currency;
             $amount = 1000;
             $from = 'NOK';
             $to = 'XXX';
             $expected = 'Destination currency not found';
 
-            $result = $currency->convert($amount, $from, $to);
+            $result = $this->currency->convert($amount, $from, $to);
 
             $this->assertEquals($expected, $result);
         }
