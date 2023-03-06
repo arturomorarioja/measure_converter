@@ -1,4 +1,13 @@
 <?php
+/**
+ * Integration tests for currency conversion.
+ * Components tested:
+ * - Currency class
+ * - Currency API curencyapi.com
+ * 
+ * @author  Arturo Mora-Rioja
+ * @version 1.0.0 March 2023
+ */
 
     require_once 'src/currency.php';
 

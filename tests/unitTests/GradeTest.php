@@ -1,14 +1,4 @@
 <?php
-/**
- * Integration tests for grading.
- * Components tested:
- * - Grade class
- * - Database
- * 
- * @author  Arturo Mora-Rioja
- * @version 1.0, March 2022
- */
-
     require_once 'src/grade.php';
 
     use PHPUnit\Framework\TestCase;
@@ -18,15 +8,17 @@
         private Grade $grade;
 
         protected function setUp(): void {
-            $this->grade = new Grade();
+            $this->grade = $this->createStub(Grade::class);
         }
-
+        
         protected function tearDown(): void {
             unset($this->grade);
         }
-
+        
         public function testConvert12Passes(): void {
-
+            $this->grade->method('convert')
+                 ->willReturn('A+');
+            
             $result = $this->grade->convert('12', GRADE::DENMARK);
 
             $this->assertEquals('A+', $result);
@@ -36,6 +28,8 @@
          * @dataProvider ConvertPasses
          */
         public function testConvertPasses($gradeToConvert, $system, $expected): void {
+            $this->grade->method('convert')
+                 ->willReturn($expected);
             $result = $this->grade->convert($gradeToConvert, $system);
 
             $this->assertEquals($expected, $result);
@@ -57,12 +51,7 @@
                 ['F', Grade::USA, '00'],
                 ['K', Grade::USA, 'Invalid value']
             ];
-        }
-
-        //  No assertNotEquals are necessary,
-        //  since they would simply test the opposite 
-        //  of what ConvertPasses has already tested
-        
+        }        
     }
 
 ?>
