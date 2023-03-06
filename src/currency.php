@@ -9,9 +9,10 @@
  *                             Refactoring: the cURL API call is now a private method
  *          1.0.2 January 2023 Currency API key hidden
  *                             Readme added  
+ *          1.0.3 March 2023   Directory references improved 
  */
 
-    require_once '../info/info.php';
+    require_once __DIR__ . '/../info/info.php';
 
     class Currency {
         
@@ -54,9 +55,12 @@
 
             if (isset($response['errors'])) {
                 return $response['message'];
-            } else {
-                return round($amount * $response['data'][$destinationCurrency]['value'], 2);
-            }
+            } 
+            
+            if (!array_key_exists($destinationCurrency, $response['data'])) {
+                return 'Destination currency not found';
+            } 
+            return round($amount * $response['data'][$destinationCurrency]['value'], 2);
         }
     }
 ?>
