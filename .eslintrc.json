@@ -15,7 +15,7 @@
             4
         ],
         "linebreak-style": [
-            "error",
+            "off",
             "windows"
         ],
         "quotes": [
@@ -25,6 +25,7 @@
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "no-undef": "off"
     }
 }
