@@ -11,7 +11,7 @@ jobs:
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 
-    - name: Install dependencies
+    - name: Install PHP dependencies
       run: composer install --prefer-dist --no-progress
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
@@ -19,6 +19,9 @@ jobs:
 
     - name: Run PHPUnit test suite
       run: composer run-script test
+      
+    - name: Install JavaScript dependencies
+      run: npm install
       
     - name: Run Cypress tests on Chrome
       uses: cypress-io/github-action@v5
