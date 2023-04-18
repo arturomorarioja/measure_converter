@@ -23,12 +23,10 @@ jobs:
     - name: Install JavaScript dependencies
       run: npm install
 
-    - name: Run Cypress tests on Chrome
-      run: npm test
-      
     # - name: Run Cypress tests on Chrome
-    #   uses: cypress-io/github-action@v5
-    #   timeout-minutes: 10
-    #   with:
-    #     command: npx cypress run
-    #     browser: chrome
+    #   run: npm test
+      
+    - name: Run Cypress tests on Chrome
+      uses: cypress-io/github-action@v5
+      with:
+        start: npm start
