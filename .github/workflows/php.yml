@@ -29,4 +29,4 @@ jobs:
     - name: Run Cypress tests on Chrome
       uses: cypress-io/github-action@v5
       with:
-        start: npm start
+        start: npm test
