@@ -1,4 +1,5 @@
-const { defineConfig } = require("cypress");
+/* eslint-disable indent */
+const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
   e2e: {
@@ -8,5 +9,6 @@ module.exports = defineConfig({
   },
   integration: {
     
-  }
+  },
+  baseUrl: 'http://localhost:80'
 });
