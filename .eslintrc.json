@@ -11,7 +11,7 @@
     },
     "rules": {
         "indent": [
-            "warn",
+            "error",
             4
         ],
         "linebreak-style": [

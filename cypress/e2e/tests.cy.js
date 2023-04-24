@@ -11,7 +11,7 @@ describe('length tests', () => {
     });
 
     it('test that 1500 centimetres is 590.55 inches', () => {
-        cy.get('#txtLength').type('1500');
+        cy.get('#txtLength').type('1500').debug();
         cy.get('#radMetric').check();
         cy.get('section#sectionLength input[type=submit]').click();
         cy.get('section#sectionLength > div').should('have.text', '1500 centimeters is 590.55 inches');
