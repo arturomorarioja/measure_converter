@@ -9,6 +9,7 @@ It allows conversions between the following measure systems:
 - Currency: between all currencies at https://currencyapi.com/
 - Academic grades: between the Danish and American systems
 
+
 ## Installation
 
 1. A file `info/info.php` must be created with the following content:
