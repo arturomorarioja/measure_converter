@@ -1,7 +1,5 @@
-const BASE_URL = 'http://localhost/__js/wat_cypress_examples/php_mysql_measure_converter/';
-
 beforeEach(() => {
-    cy.visit(BASE_URL);
+    cy.visit('');
 });
 
 describe('length tests', () => {
