@@ -12,6 +12,13 @@
     define('BASE_PATH', '../src/');
     define('ERROR_MSG', 'Error: incorrect API call');
 
+    echo 'Start';
+    foreach ($_POST as $key => $value) {
+        $_POST[$key] = filter_var(htmlspecialchars($value), FILTER_SANITIZE_SPECIAL_CHARS);
+    }
+    print_r($_POST);
+    echo filter_var(htmlspecialchars("<script>alert('Hi');</script>"), FILTER_SANITIZE_SPECIAL_CHARS);
+
     if (!empty($_POST['conversion'])) {
         $conversion = $_POST['conversion'];
 

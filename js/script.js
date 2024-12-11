@@ -47,7 +47,7 @@ $(function() {
         const measure = $('#txtTemperature').val();
         const from = $('#lstFrom').val();
         const to = $('#lstTo').val();
-
+        
         $.ajax({
             url: API_URL,
             method: 'POST',
