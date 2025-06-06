@@ -26,7 +26,10 @@
             curl_setopt($ch, CURLOPT_HEADER, false);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-type: application/json']);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                'Content-type: application/json',
+                'apikey: ' . self::API_KEY
+            ]);
             $response = json_decode(curl_exec($ch), true);
             curl_close($ch);
 
@@ -38,9 +41,11 @@
         }
 
         public function getCurrencies() {
-            $url = self::BASE_URL . 'currencies?apikey=' . self::API_KEY;
+            $url = self::BASE_URL . 'currencies';
 
             $response = $this->apiCall($url);
+
+            return $response;
 
             // array_values turns the associative array into a normal array, so that it can be processed by array_map.
             // array_filter eliminates null values.
@@ -49,10 +54,12 @@
         }
 
         public function convert(float $amount, string $baseCurrency = 'DKK', string $destinationCurrency = 'EUR') {
-            $url = self::BASE_URL . 'latest?apikey=' . self::API_KEY . '&base_currency=' . $baseCurrency;
+            $url = self::BASE_URL . 'latest?base_currency=' . $baseCurrency;
+            // $url = self::BASE_URL . 'convert?base_currency=' . $baseCurrency . '&value=' . $amount;
 
             $response = $this->apiCall($url);
 
+            // return $response;
             if (isset($response['errors'])) {
                 return $response['message'];
             } 

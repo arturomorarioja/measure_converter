@@ -74,11 +74,11 @@ $(function() {
             'action': 'getCurrencyList'
         }
     }).done(function(result) {
-        result = JSON.parse(result);
+        result = JSON.parse(result).data;
         // eslint-disable-next-line no-unused-vars
         for (const [key, value] of Object.entries(result)) {
-            $('#cmbFrom').append($('<option>').val(value[0]).text(value[0] + ' - ' + value[1]));
-            $('#cmbTo').append($('<option>').val(value[0]).text(value[0] + ' - ' + value[1]));
+            $('#cmbFrom').append($('<option>').val(key).text(key + ' - ' + value.name));
+            $('#cmbTo').append($('<option>').val(key).text(key + ' - ' + value.name));
         }
         // Default values
         $('#cmbFrom > option[value="DKK"]').attr('selected', true);
@@ -102,6 +102,7 @@ $(function() {
                 'destinationCurrency': to
             }
         }).done(function(result) {
+            console.log(result);
             const text = `${measure} ${from} is ${result} ${to}`;
 
             $('#sectionCurrency > div').text(text);
