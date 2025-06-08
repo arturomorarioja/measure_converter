@@ -84,15 +84,28 @@ describe('grade tests', () => {
     ];
 
     beforeEach(() => {
+        // Intercept the POST request and wait for it to finish
+        cy.intercept('POST', '**/api/index.php').as('gradeRequest');
+
         cy.get('#menuGrading').click();
+        cy.get('#cmbGrade').should('exist');
     });
 
     gradeConversions.forEach(conversion => {
         it(`test that ${conversion.GradeFrom} in ${conversion.From} is ${conversion.GradeTo} in ${conversion.To}`, () => {
+            
             cy.get(`#rad${conversion.From}`).check();
-            cy.get('#cmbGrade').select(conversion.GradeFrom);
+            cy.get('#cmbGrade')
+                .should('contain', conversion.GradeFrom)
+                .select(conversion.GradeFrom);            
+            
             cy.get('section#sectionGrading input[type=submit]').click();
-            cy.get('section#sectionGrading > div').should('have.text', `${conversion.GradeFrom} in ${conversion.From} is ${conversion.GradeTo} in ${conversion.To}`);
+            cy.wait('@gradeRequest');
+
+            cy.get('section#sectionGrading > div').should(
+                'have.text', 
+                `${conversion.GradeFrom} in ${conversion.From} is ${conversion.GradeTo} in ${conversion.To}`
+            );
         });
     });
 });

@@ -74,6 +74,7 @@ $(function() {
             'action': 'getCurrencyList'
         }
     }).done(function(result) {
+        console.log(result);
         result = JSON.parse(result).data;
         // eslint-disable-next-line no-unused-vars
         for (const [key, value] of Object.entries(result)) {
