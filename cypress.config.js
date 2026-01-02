@@ -3,8 +3,8 @@ const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: 'http://localhost/__testE25/_e2e/measure_converter',
-    setupNodeEvents(on, config) {
+    baseUrl: 'http://localhost/measure_converter',
+    setupNodeEvents(on, config) {   // eslint-disable-line
       // implement node event listeners here
     },
   },
