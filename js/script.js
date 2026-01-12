@@ -76,11 +76,20 @@ $(function() {
     }).done(function(result) {
         console.log(result);
         result = JSON.parse(result).data;
-        // eslint-disable-next-line no-unused-vars
-        for (const [key, value] of Object.entries(result)) {
-            $('#cmbFrom').append($('<option>').val(key).text(key + ' - ' + value.name));
-            $('#cmbTo').append($('<option>').val(key).text(key + ' - ' + value.name));
+
+        for (const key in result) {
+            if (Object.prototype.hasOwnProperty.call(result, key)) {
+                const value = result[key];
+
+                $('#cmbFrom').append(
+                    $('<option>').val(key).text(key + ' - ' + value.name)
+                );
+                $('#cmbTo').append(
+                    $('<option>').val(key).text(key + ' - ' + value.name)
+                );
+            }
         }
+
         // Default values
         $('#cmbFrom > option[value="DKK"]').attr('selected', true);
         $('#cmbTo > option[value="EUR"]').attr('selected', true);
