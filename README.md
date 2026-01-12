@@ -33,7 +33,7 @@ The unit tests for the PHP code are managed by PHPUnit. They lie under `tests\un
 ## Integration tests
 
 There are two types of integration tests:
-1. Integration tests in code, managed by PHPUnit. They are under `tests\integrationTests`:
+1. Integration tests in code, managed by PHPUnit. They are under `tests\integrationTests` and can be run with the command `composer testInt`:
 - CurrencyTest tests the integration with the currency API. As most of the data returned by said API is non-deterministic (currency exchange changes daily), the tests only check data formalities
 - GradeTest tests the integration with the grading table in the database
 2. Continuous integration job in GitHub Actions that runs the unit tests. Its script is at `.github/workflows/php.yml`
@@ -48,4 +48,4 @@ Programming: PHP8 / JQuery / JavaScript / CSS3 / HTML5
 Testing: PHPUnit / GitHub Actions / Cypress
 
 ## Author
-Arturo Mora-Rioja (amri@kea.dk)
+Arturo Mora-Rioja

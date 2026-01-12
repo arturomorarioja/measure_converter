@@ -15,5 +15,8 @@
             <directory>tests/unitTests</directory>
             <exclude>tests/unitTests/CurrencyTest.php</exclude>
         </testsuite>
+        <testsuite name="IntegrationTests">
+            <directory>tests/integrationTests</directory>
+        </testsuite>
     </testsuites>
 </phpunit>
