@@ -15,6 +15,9 @@
             unset($this->grade);
         }
         
+        // Horrible test.
+        // It simply asserts that the hardcoded value 'A+' is actually 'A+'
+
         public function testConvert12Passes(): void {
             $this->grade->method('convert')
                  ->willReturn('A+');
@@ -23,6 +26,10 @@
 
             $this->assertEquals('A+', $result);
         }
+
+        // This test is even worse.
+        // It hardcodes all input and output values, 
+        // thus simply checking for hardcoded values
 
         /**
          * @dataProvider ConvertPasses

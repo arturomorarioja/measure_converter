@@ -6,6 +6,8 @@
 
     class TemperatureTest extends TestCase {
 
+        // Good tests in the same vein as the length tests
+
         /**
          * @dataProvider ConvertCelsiusToFahrenheitPasses
          */

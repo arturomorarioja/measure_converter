@@ -18,6 +18,11 @@ class CurrencyTest extends TestCase
         unset($this->currency);
     }
 
+    // This test is useless. 
+    // It only tests that the empty array we hardcoded is, in fact, an array.
+    // Do never implement mocking as part of a recipe one follows.
+    // Test relevance must be assessed based on the value the test brings.
+
     public function testGetCurrencies(): void
     {
         $this->currency->method('getCurrencies')
@@ -26,6 +31,13 @@ class CurrencyTest extends TestCase
         $result = $this->currency->getCurrencies();
         $this->assertIsArray($result);
     }
+
+    // The following test is even more dangerous than the previous one,
+    // since it apparently tests with different values,
+    // but only their data type is asserted.
+    // Anyway, the actual return value is hardcoded (a zero).
+    // Since 0 is numeric, the test always passes, 
+    // but tests nothing in the actual system
 
     /**
      * @dataProvider ConvertNoCurrencies
@@ -48,6 +60,8 @@ class CurrencyTest extends TestCase
         ];
     }
 
+    // Horrible test. Same as the previous one.
+
     /**
      * @dataProvider ConvertFromCurrency
      */
@@ -69,6 +83,8 @@ class CurrencyTest extends TestCase
         ];
     }        
 
+    // Same.
+
     /**
      * @dataProvider Convert
      */
@@ -89,6 +105,9 @@ class CurrencyTest extends TestCase
             [1245.25, 'MXN', 'USD']
         ];
     }        
+
+    // Two more bad tests.
+    // Again they assess hardcoded values.
 
     public function testNonExistingFromCurrency()
     {

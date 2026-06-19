@@ -6,6 +6,11 @@
 
     class LengthTest extends TestCase {
 
+        // Good tests.
+        // A series of values found out via black-box design 
+        // are assessed against their expected values.
+        // System functionality (specifically business logic) is tested.
+
         /**
          * @dataProvider ConvertPasses
          */
